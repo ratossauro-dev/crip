@@ -2,6 +2,63 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from '../i18n/LanguageContext'
 import { ArrowDownUp, Clipboard, ChevronDown } from 'lucide-react'
 
+const CoinButton = ({ coin, onClick, label, amount, onAmountChange, isSend, recvAmount, t }) => (
+    <div style={{ marginBottom: 6 }}>
+        <span style={{ fontSize: 12, color: '#94a3b8', fontWeight: 500 }}>{label}</span>
+        <div style={{ display: 'flex', gap: 8, marginTop: 4 }}>
+            <button
+                onClick={onClick}
+                className="coin-selector-btn"
+                style={{
+                    flex: '0 0 auto', background: 'var(--color-surface)',
+                    border: '1px solid var(--color-border)', borderRadius: 12,
+                    padding: '10px 14px', display: 'flex', alignItems: 'center', gap: 8,
+                    cursor: 'pointer', color: '#fff', fontFamily: 'Outfit', fontSize: 15,
+                    minWidth: 140, transition: 'border-color 0.2s'
+                }}
+            >
+                <div style={{
+                    width: 28, height: 28, borderRadius: '50%', background: coin?.color || '#333',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontSize: 11, fontWeight: 700, color: '#fff'
+                }}>
+                    {coin?.symbol?.slice(0, 2) || '?'}
+                </div>
+                <div style={{ textAlign: 'left' }}>
+                    <div style={{ fontWeight: 600, fontSize: 14 }}>{coin?.symbol || '---'}</div>
+                    <div style={{ fontSize: 10, color: '#64748b' }}>{coin?.network || ''}</div>
+                </div>
+                <ChevronDown size={16} color="#64748b" />
+            </button>
+            {isSend ? (
+                <input
+                    type="number"
+                    value={amount}
+                    onChange={e => onAmountChange(e.target.value)}
+                    className="coin-amount-input"
+                    style={{
+                        flex: 1, background: 'var(--color-input)', border: '1px solid var(--color-border)',
+                        borderRadius: 12, padding: '10px 14px', color: '#fff',
+                        fontFamily: 'Outfit', fontSize: 18, fontWeight: 600, outline: 'none',
+                        minWidth: 0
+                    }}
+                    min="0"
+                />
+            ) : (
+                <div className="coin-amount-display" style={{
+                    flex: 1, background: 'var(--color-input)', border: '1px solid var(--color-border)',
+                    borderRadius: 12, padding: '10px 14px', color: '#7c3aed',
+                    fontFamily: 'Outfit', fontSize: 18, fontWeight: 600,
+                    display: 'flex', alignItems: 'center', minWidth: 0,
+                    overflow: 'hidden', textOverflow: 'ellipsis'
+                }}>
+                    {recvAmount}
+                </div>
+            )}
+        </div>
+    </div>
+)
+
 export default function SwapWidget({ coins, onCreateOrder, openCurrencyModal }) {
     const { t } = useTranslation()
 
@@ -52,63 +109,6 @@ export default function SwapWidget({ coins, onCreateOrder, openCurrencyModal }) 
         })
     }
 
-    const CoinButton = ({ coin, onClick, label }) => (
-        <div style={{ marginBottom: 6 }}>
-            <span style={{ fontSize: 12, color: '#94a3b8', fontWeight: 500 }}>{label}</span>
-            <div style={{ display: 'flex', gap: 8, marginTop: 4 }}>
-                <button
-                    onClick={onClick}
-                    className="coin-selector-btn"
-                    style={{
-                        flex: '0 0 auto', background: 'var(--color-surface)',
-                        border: '1px solid var(--color-border)', borderRadius: 12,
-                        padding: '10px 14px', display: 'flex', alignItems: 'center', gap: 8,
-                        cursor: 'pointer', color: '#fff', fontFamily: 'Outfit', fontSize: 15,
-                        minWidth: 140, transition: 'border-color 0.2s'
-                    }}
-                >
-                    <div style={{
-                        width: 28, height: 28, borderRadius: '50%', background: coin?.color || '#333',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        fontSize: 11, fontWeight: 700, color: '#fff'
-                    }}>
-                        {coin?.symbol?.slice(0, 2) || '?'}
-                    </div>
-                    <div style={{ textAlign: 'left' }}>
-                        <div style={{ fontWeight: 600, fontSize: 14 }}>{coin?.symbol || '---'}</div>
-                        <div style={{ fontSize: 10, color: '#64748b' }}>{coin?.network || ''}</div>
-                    </div>
-                    <ChevronDown size={16} color="#64748b" />
-                </button>
-                {label === t('widget.send') ? (
-                    <input
-                        type="number"
-                        value={sendAmount}
-                        onChange={e => setSendAmount(e.target.value)}
-                        className="coin-amount-input"
-                        style={{
-                            flex: 1, background: 'var(--color-input)', border: '1px solid var(--color-border)',
-                            borderRadius: 12, padding: '10px 14px', color: '#fff',
-                            fontFamily: 'Outfit', fontSize: 18, fontWeight: 600, outline: 'none',
-                            minWidth: 0
-                        }}
-                        min="0"
-                    />
-                ) : (
-                    <div className="coin-amount-display" style={{
-                        flex: 1, background: 'var(--color-input)', border: '1px solid var(--color-border)',
-                        borderRadius: 12, padding: '10px 14px', color: '#7c3aed',
-                        fontFamily: 'Outfit', fontSize: 18, fontWeight: 600,
-                        display: 'flex', alignItems: 'center', minWidth: 0,
-                        overflow: 'hidden', textOverflow: 'ellipsis'
-                    }}>
-                        {recvAmount}
-                    </div>
-                )}
-            </div>
-        </div>
-    )
-
     return (
         <div className="glass-card animate-fade-in swap-widget" style={{
             maxWidth: 460, width: '100%', padding: 28
@@ -141,6 +141,10 @@ export default function SwapWidget({ coins, onCreateOrder, openCurrencyModal }) 
                 coin={sendCoin}
                 onClick={() => openCurrencyModal('send', coins, (c) => setSendCoin(c))}
                 label={t('widget.send')}
+                amount={sendAmount}
+                onAmountChange={setSendAmount}
+                isSend={true}
+                t={t}
             />
 
             {/* Swap Arrow */}
@@ -165,6 +169,9 @@ export default function SwapWidget({ coins, onCreateOrder, openCurrencyModal }) 
                 coin={recvCoin}
                 onClick={() => openCurrencyModal('recv', coins, (c) => setRecvCoin(c))}
                 label={t('widget.receive')}
+                recvAmount={recvAmount}
+                isSend={false}
+                t={t}
             />
 
             {/* Exchange Rate */}
