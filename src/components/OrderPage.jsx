@@ -139,7 +139,7 @@ export default function OrderPage({ order, onBack }) {
                     gap: 12, fontSize: 13, color: '#94a3b8'
                 }}>
                     <div>{t('order.order_id')}: <span style={{ color: '#fff' }}>{orderId}</span></div>
-                    <div>{t('order.order_type')}: <span style={{ color: '#fff' }}>{order.rateType === 'fixed' ? '⚡ Fixed' : '📊 Float'}</span></div>
+                    <div>{t('order.order_type')}: <span style={{ color: '#fff' }}>{order.rateType === 'fixed' ? 'Fixed' : 'Float'}</span></div>
                 </div>
             </div>
 
@@ -177,7 +177,7 @@ export default function OrderPage({ order, onBack }) {
                     </div>
                 ) : error ? (
                     <div style={{ padding: 16, background: 'rgba(239,68,68,0.1)', borderRadius: 12, color: '#ef4444', fontSize: 14 }}>
-                        ❌ {error}
+                        {error}
                     </div>
                 ) : (
                     <>
@@ -264,7 +264,7 @@ export default function OrderPage({ order, onBack }) {
                 </h4>
                 <p style={{ fontSize: 12, color: '#64748b', marginBottom: 12 }}>{t('order.email_desc')}</p>
                 {emailSent ? (
-                    <p style={{ fontSize: 13, color: '#16a34a' }}>✅ {t('order.email_success')}</p>
+                    <p style={{ fontSize: 13, color: '#16a34a' }}>{t('order.email_success')}</p>
                 ) : (
                     <div style={{ display: 'flex', gap: 8 }}>
                         <input

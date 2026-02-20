@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from '../i18n/LanguageContext'
-import { ArrowDownUp, Clipboard, ChevronDown, Sparkles, Loader } from 'lucide-react'
+import { ArrowDownUp, Clipboard, ChevronDown } from 'lucide-react'
 
 export default function SwapWidget({ coins, onCreateOrder, openCurrencyModal }) {
     const { t } = useTranslation()
@@ -10,8 +10,6 @@ export default function SwapWidget({ coins, onCreateOrder, openCurrencyModal }) 
     const [sendAmount, setSendAmount] = useState('0.1')
     const [destAddress, setDestAddress] = useState('')
     const [rateType, setRateType] = useState('fixed')
-    const [aiText, setAiText] = useState('')
-    const [aiLoading, setAiLoading] = useState(false)
 
     // Set defaults when coins load
     useEffect(() => {
@@ -131,7 +129,7 @@ export default function SwapWidget({ coins, onCreateOrder, openCurrencyModal }) 
                             transition: 'all 0.2s'
                         }}
                     >
-                        {type === 'fixed' ? `⚡ ${t('widget.fixed_rate')} (${feeLabel})` : `📊 ${t('widget.float_rate')} (${feeLabel})`}
+                        {type === 'fixed' ? `${t('widget.fixed_rate')} (${feeLabel})` : `${t('widget.float_rate')} (${feeLabel})`}
                     </button>
                 ))}
             </div>
@@ -213,7 +211,7 @@ export default function SwapWidget({ coins, onCreateOrder, openCurrencyModal }) 
                 marginTop: 12, display: 'flex', justifyContent: 'space-between',
                 fontSize: 12, color: '#64748b'
             }}>
-                <span>⏱ {t('widget.min_time')}</span>
+                <span>{t('widget.min_time')}</span>
                 <span>{t('widget.network_fee')}: {t('widget.included')}</span>
             </div>
 
@@ -227,39 +225,8 @@ export default function SwapWidget({ coins, onCreateOrder, openCurrencyModal }) 
                     marginTop: 20, letterSpacing: 0.5
                 }}
             >
-                ⚡ {destAddress.length >= 10 ? t('widget.exchange_now') : t('widget.enter_address')}
+                {destAddress.length >= 10 ? t('widget.exchange_now') : t('widget.enter_address')}
             </button>
-
-            {/* AI Analysis Button */}
-            <button
-                onClick={async () => {
-                    if (aiLoading || !sendCoin) return
-                    setAiLoading(true)
-                    setAiText('')
-                    setTimeout(() => {
-                        setAiText(`${sendCoin.symbol}/${recvCoin.symbol}: Market looks stable. ${sendCoin.symbol} has shown +2.3% in the last 24h. Good time for a swap with ${rateType} rate. Network fees are low on ${sendCoin.network}.`)
-                        setAiLoading(false)
-                    }, 2000)
-                }}
-                style={{
-                    width: '100%', padding: '12px 0', marginTop: 10,
-                    background: 'transparent', border: '1px solid rgba(124, 58, 237, 0.3)',
-                    borderRadius: 12, color: '#7c3aed', fontFamily: 'Outfit',
-                    fontSize: 13, fontWeight: 500, cursor: 'pointer',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8
-                }}
-            >
-                {aiLoading ? <Loader size={14} className="animate-spin" /> : <Sparkles size={14} />}
-                {aiLoading ? t('widget.ai_analyzing') : t('widget.ai_btn')}
-            </button>
-            {aiText && (
-                <div style={{
-                    marginTop: 8, padding: 12, background: 'rgba(124, 58, 237, 0.08)',
-                    borderRadius: 10, fontSize: 12, color: '#c4b5fd', lineHeight: 1.5
-                }}>
-                    {aiText}
-                </div>
-            )}
         </div>
     )
 }
