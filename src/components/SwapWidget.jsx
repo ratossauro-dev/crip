@@ -23,8 +23,10 @@ export default function SwapWidget({ coins, onCreateOrder, openCurrencyModal }) 
     const feeLabel = rateType === 'fixed' ? '1%' : '0.5%'
 
     const recvAmount = useMemo(() => {
-        if (!sendCoin?.rateToUSD || !recvCoin?.rateToUSD || !sendAmount) return '0'
-        const usdValue = parseFloat(sendAmount) * sendCoin.rateToUSD
+        if (!sendCoin?.rateToUSD || !recvCoin?.rateToUSD || sendAmount === '') return '0'
+        const parsed = parseFloat(sendAmount)
+        if (isNaN(parsed) || parsed <= 0) return '0'
+        const usdValue = parsed * sendCoin.rateToUSD
         const afterFee = usdValue * (1 - fee)
         const result = afterFee / recvCoin.rateToUSD
         return result > 0 ? result.toFixed(8).replace(/0+$/, '').replace(/\.$/, '') : '0'
