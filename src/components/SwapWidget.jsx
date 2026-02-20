@@ -106,7 +106,7 @@ export default function SwapWidget({ coins, onCreateOrder, openCurrencyModal }) 
     )
 
     return (
-        <div className="glass-card animate-fade-in" style={{
+        <div className="glass-card animate-fade-in swap-widget" style={{
             maxWidth: 460, width: '100%', padding: 28
         }}>
             {/* Rate Toggle */}
@@ -118,6 +118,7 @@ export default function SwapWidget({ coins, onCreateOrder, openCurrencyModal }) 
                     <button
                         key={type}
                         onClick={() => setRateType(type)}
+                        className="rate-toggle-btn"
                         style={{
                             flex: 1, padding: '10px 0', border: 'none', borderRadius: 10,
                             background: rateType === type ? 'var(--color-primary)' : 'transparent',

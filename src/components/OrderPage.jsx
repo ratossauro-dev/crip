@@ -71,7 +71,7 @@ export default function OrderPage({ order, onBack }) {
     ]
 
     return (
-        <div style={{
+        <div className="order-page" style={{
             maxWidth: 600, margin: '100px auto 40px', padding: '0 20px',
             animation: 'fadeIn 0.5s ease-out'
         }}>
@@ -85,7 +85,7 @@ export default function OrderPage({ order, onBack }) {
             </button>
 
             {/* Progress Steps */}
-            <div style={{
+            <div className="order-steps" style={{
                 display: 'flex', justifyContent: 'space-between', marginBottom: 30
             }}>
                 {steps.map((step, i) => (
@@ -118,7 +118,7 @@ export default function OrderPage({ order, onBack }) {
 
             {/* Order Summary */}
             <div className="glass-card" style={{ padding: 24, marginBottom: 16 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
+                <div className="order-summary-amounts" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
                     <div>
                         <div style={{ fontSize: 12, color: '#94a3b8', marginBottom: 4 }}>{t('order.sent')}</div>
                         <div style={{ fontSize: 24, fontWeight: 700, color: '#fff' }}>
@@ -126,7 +126,7 @@ export default function OrderPage({ order, onBack }) {
                         </div>
                     </div>
                     <ArrowRight size={24} color="#2f8af5" />
-                    <div style={{ textAlign: 'right' }}>
+                    <div className="order-summary-recv" style={{ textAlign: 'right' }}>
                         <div style={{ fontSize: 12, color: '#94a3b8', marginBottom: 4 }}>{t('order.received')}</div>
                         <div style={{ fontSize: 24, fontWeight: 700, color: '#fff' }}>
                             {order.recvAmount} <span style={{ color: order.recvCoin.color }}>{order.recvCoin.symbol}</span>
@@ -134,7 +134,7 @@ export default function OrderPage({ order, onBack }) {
                     </div>
                 </div>
 
-                <div style={{
+                <div className="order-grid" style={{
                     marginTop: 16, display: 'grid', gridTemplateColumns: '1fr 1fr',
                     gap: 12, fontSize: 13, color: '#94a3b8'
                 }}>
@@ -152,7 +152,7 @@ export default function OrderPage({ order, onBack }) {
                     <Clock size={14} style={{ verticalAlign: 'middle', marginRight: 6 }} />
                     {t('order.time_remaining')}
                 </div>
-                <div style={{
+                <div className="order-timer-value" style={{
                     fontSize: 32, fontWeight: 700,
                     color: timeLeft < 120 ? '#ef4444' : '#2f8af5',
                     fontVariantNumeric: 'tabular-nums'

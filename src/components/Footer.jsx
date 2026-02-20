@@ -10,7 +10,7 @@ export default function Footer({ openModal, setCurrentPage }) {
             borderTop: '1px solid var(--color-border)', padding: '48px 24px 24px',
             marginTop: 'auto', background: 'rgba(5, 6, 10, 0.6)'
         }}>
-            <div style={{
+            <div className="footer-grid" style={{
                 maxWidth: 1100, margin: '0 auto',
                 display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
                 gap: 32, marginBottom: 36
@@ -27,7 +27,7 @@ export default function Footer({ openModal, setCurrentPage }) {
                         </div>
                         <span style={{ fontSize: 16, fontWeight: 700, color: '#fff' }}>CryptoSwap</span>
                     </div>
-                    <p style={{ fontSize: 13, color: '#64748b', lineHeight: 1.5, maxWidth: 250 }}>
+                    <p className="footer-brand-text" style={{ fontSize: 13, color: '#64748b', lineHeight: 1.5, maxWidth: 250 }}>
                         {t('footer.desc')}
                     </p>
                 </div>

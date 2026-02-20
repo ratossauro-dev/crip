@@ -53,7 +53,7 @@ export default function App() {
         return (
             <>
                 {/* Hero Section */}
-                <section style={{
+                <section className="hero-section" style={{
                     minHeight: '100vh', display: 'flex', alignItems: 'center',
                     justifyContent: 'center', flexDirection: 'column',
                     padding: '100px 24px 40px', position: 'relative'
@@ -63,31 +63,31 @@ export default function App() {
                         position: 'absolute', width: 300, height: 300, borderRadius: '50%',
                         background: 'radial-gradient(circle, rgba(47,138,245,0.08) 0%, transparent 70%)',
                         top: '10%', left: '5%', pointerEvents: 'none'
-                    }} className="animate-float" />
+                    }} className="animate-float floating-orb" />
                     <div style={{
                         position: 'absolute', width: 250, height: 250, borderRadius: '50%',
                         background: 'radial-gradient(circle, rgba(124,58,237,0.06) 0%, transparent 70%)',
                         bottom: '15%', right: '8%', pointerEvents: 'none',
                         animationDelay: '3s'
-                    }} className="animate-float" />
+                    }} className="animate-float floating-orb" />
 
-                    <div style={{
+                    <div className="hero-content" style={{
                         display: 'flex', alignItems: 'center', gap: 60,
                         maxWidth: 1100, width: '100%', flexWrap: 'wrap', justifyContent: 'center'
                     }}>
                         {/* Left text */}
-                        <div style={{ flex: '1 1 400px', maxWidth: 500 }} className="animate-fade-in">
-                            <h1 style={{ fontSize: 48, fontWeight: 800, lineHeight: 1.1, color: '#fff', marginBottom: 20 }}>
+                        <div style={{ flex: '1 1 400px', maxWidth: 500 }} className="animate-fade-in hero-text">
+                            <h1 className="hero-title" style={{ fontSize: 48, fontWeight: 800, lineHeight: 1.1, color: '#fff', marginBottom: 20 }}>
                                 {t('hero.title_1')}<br />
                                 <span className="text-gradient">{t('hero.title_2')}</span><br />
                                 {t('hero.title_3')}
                             </h1>
-                            <p style={{ fontSize: 16, color: '#94a3b8', lineHeight: 1.6, marginBottom: 32, maxWidth: 420 }}>
+                            <p className="hero-subtitle" style={{ fontSize: 16, color: '#94a3b8', lineHeight: 1.6, marginBottom: 32, maxWidth: 420 }}>
                                 {t('hero.subtitle')}
                             </p>
 
                             {/* Stats */}
-                            <div style={{ display: 'flex', gap: 24 }}>
+                            <div className="hero-stats" style={{ display: 'flex', gap: 24 }}>
                                 {[
                                     { icon: TrendingUp, value: '20+', label: t('hero.stat_currencies') },
                                     { icon: Users, value: '100%', label: t('hero.stat_automatic') },
@@ -95,7 +95,7 @@ export default function App() {
                                 ].map((stat, i) => (
                                     <div key={i} style={{ textAlign: 'center' }}>
                                         <stat.icon size={20} color="#2f8af5" style={{ marginBottom: 4 }} />
-                                        <div style={{ fontSize: 22, fontWeight: 700, color: '#fff' }}>{stat.value}</div>
+                                        <div className="hero-stat-value" style={{ fontSize: 22, fontWeight: 700, color: '#fff' }}>{stat.value}</div>
                                         <div style={{ fontSize: 11, color: '#64748b' }}>{stat.label}</div>
                                     </div>
                                 ))}
@@ -120,10 +120,10 @@ export default function App() {
                 <Features />
 
                 {/* FAQ Inline Section */}
-                <section style={{
+                <section className="faq-section" style={{
                     maxWidth: 700, margin: '0 auto 80px', padding: '0 24px', textAlign: 'center'
                 }}>
-                    <h2 style={{ fontSize: 32, fontWeight: 700, color: '#fff', marginBottom: 8 }}>
+                    <h2 className="faq-title" style={{ fontSize: 32, fontWeight: 700, color: '#fff', marginBottom: 8 }}>
                         {t('faq.title')}
                     </h2>
                     <p style={{ fontSize: 15, color: '#94a3b8', marginBottom: 32 }}>{t('faq.subtitle')}</p>

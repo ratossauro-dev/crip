@@ -12,18 +12,18 @@ export default function Features() {
     ]
 
     return (
-        <section style={{
+        <section className="features-section" style={{
             maxWidth: 1100, margin: '80px auto', padding: '0 24px',
             textAlign: 'center'
         }}>
-            <h2 style={{ fontSize: 36, fontWeight: 700, color: '#fff', marginBottom: 12 }}>
+            <h2 className="features-title" style={{ fontSize: 36, fontWeight: 700, color: '#fff', marginBottom: 12 }}>
                 {t('features.title')} <span className="text-gradient">CryptoSwap</span>?
             </h2>
             <p style={{ fontSize: 16, color: '#94a3b8', maxWidth: 600, margin: '0 auto 48px' }}>
                 {t('features.subtitle')}
             </p>
 
-            <div style={{
+            <div className="features-grid" style={{
                 display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
                 gap: 24
             }}>

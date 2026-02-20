@@ -15,7 +15,7 @@ export default function TransactionsTicker() {
                 display: 'flex', gap: 24, whiteSpace: 'nowrap', width: 'max-content'
             }}>
                 {items.map((tx, i) => (
-                    <div key={i} style={{
+                    <div key={i} className="ticker-item" style={{
                         display: 'flex', alignItems: 'center', gap: 8,
                         padding: '6px 16px', borderRadius: 8,
                         background: 'rgba(47, 138, 245, 0.05)',

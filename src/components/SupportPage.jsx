@@ -24,15 +24,15 @@ export default function SupportPage() {
     }
 
     return (
-        <div style={{ maxWidth: 560, margin: '120px auto 60px', padding: '0 24px' }} className="animate-fade-in">
+        <div className="animate-fade-in support-page" style={{ maxWidth: 560, margin: '120px auto 60px', padding: '0 24px' }}>
             <div style={{ textAlign: 'center', marginBottom: 36 }}>
                 <Headphones size={40} color="#2f8af5" style={{ marginBottom: 12 }} />
-                <h1 style={{ fontSize: 32, fontWeight: 700, color: '#fff', marginBottom: 8 }}>{t('support.title')}</h1>
+                <h1 className="support-title" style={{ fontSize: 32, fontWeight: 700, color: '#fff', marginBottom: 8 }}>{t('support.title')}</h1>
                 <p style={{ fontSize: 15, color: '#94a3b8' }}>{t('support.subtitle')}</p>
             </div>
 
             <div className="glass-card" style={{ padding: 32 }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
+                <div className="support-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
                     <div>
                         <label style={{ fontSize: 12, color: '#94a3b8', fontWeight: 500 }}>{t('support.label_name')}</label>
                         <input
