@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from '../i18n/LanguageContext'
 import { Menu, X, Globe } from 'lucide-react'
+import LogoIcon from './LogoIcon'
 
 export default function Header({ currentPage, setCurrentPage, openModal }) {
     const { t, lang, setLang } = useTranslation()
@@ -26,16 +27,12 @@ export default function Header({ currentPage, setCurrentPage, openModal }) {
                 {/* Logo */}
                 <div
                     onClick={() => setCurrentPage('home')}
-                    style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer' }}
+                    style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer' }}
                 >
-                    <img src="/logo.png" alt="LilacSwap" style={{ width: 36, height: 36, objectFit: 'contain' }} />
-                    <span style={{
-                        fontSize: 22, fontWeight: 800, letterSpacing: '-0.5px',
-                        background: 'linear-gradient(135deg, #C38BFF, #00D1FF)',
-                        WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-                        backgroundClip: 'text'
-                    }}>
-                        LilacSwap
+                    <LogoIcon size={36} />
+                    <span style={{ fontSize: 22, fontWeight: 800, letterSpacing: '-0.5px' }}>
+                        <span style={{ color: '#ffffff' }}>Lilac</span>
+                        <span style={{ color: '#a855f7' }}>Swap</span>
                     </span>
                 </div>
 

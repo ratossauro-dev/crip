@@ -1,5 +1,5 @@
-import React from 'react'
 import { useTranslation } from '../i18n/LanguageContext'
+import LogoIcon from './LogoIcon'
 
 
 export default function Footer({ openModal, setCurrentPage }) {
@@ -17,15 +17,11 @@ export default function Footer({ openModal, setCurrentPage }) {
             }}>
                 {/* Brand */}
                 <div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
-                        <img src="/logo.png" alt="LilacSwap" style={{ width: 24, height: 24, objectFit: 'contain' }} />
-                        <span style={{
-                            fontSize: 18, fontWeight: 800, letterSpacing: '-0.5px',
-                            background: 'linear-gradient(135deg, #C38BFF, #00D1FF)',
-                            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-                            backgroundClip: 'text'
-                        }}>
-                            LilacSwap
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginBottom: 12 }}>
+                        <LogoIcon size={24} />
+                        <span style={{ fontSize: 18, fontWeight: 800, letterSpacing: '-0.5px' }}>
+                            <span style={{ color: '#ffffff' }}>Lilac</span>
+                            <span style={{ color: '#a855f7' }}>Swap</span>
                         </span>
                     </div>
                     <p className="footer-brand-text" style={{ fontSize: 13, color: '#64748b', lineHeight: 1.5, maxWidth: 250 }}>
