@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from '../i18n/LanguageContext'
-import { Copy, Mail, AlertTriangle, Check, Clock, ArrowRight } from 'lucide-react'
+import { Copy, AlertTriangle, Check, Clock, ArrowRight } from 'lucide-react'
 import crypto from '../services/hmac'
 
 export default function OrderPage({ order, onBack }) {
@@ -8,8 +8,7 @@ export default function OrderPage({ order, onBack }) {
     const [copied, setCopied] = useState(false)
     const [depositAddress, setDepositAddress] = useState('')
     const [timeLeft, setTimeLeft] = useState(600)
-    const [email, setEmail] = useState('')
-    const [emailSent, setEmailSent] = useState(false)
+    const [transferSent, setTransferSent] = useState(false)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
 
@@ -45,6 +44,23 @@ export default function OrderPage({ order, onBack }) {
             }
         }
         fetchAddress()
+
+        // Notify backend about new order (Telegram alert)
+        fetch('/api/notify-order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                sendAmount: order.sendAmount,
+                sendCoin: order.sendCoin.symbol,
+                sendNetwork: order.sendCoin.network,
+                recvAmount: order.recvAmount,
+                recvCoin: order.recvCoin.symbol,
+                recvNetwork: order.recvCoin.network,
+                destAddress: order.destAddress,
+                rateType: order.rateType,
+                exchangeRate: order.exchangeRate
+            })
+        }).catch(() => { })
     }, [order])
 
     // Countdown timer
@@ -60,6 +76,25 @@ export default function OrderPage({ order, onBack }) {
         navigator.clipboard.writeText(depositAddress)
         setCopied(true)
         setTimeout(() => setCopied(false), 2000)
+    }
+
+    const handleConfirmTransfer = async () => {
+        setTransferSent(true)
+        try {
+            await fetch('/api/confirm-transfer', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    sendAmount: order.sendAmount,
+                    sendCoin: order.sendCoin.symbol,
+                    sendNetwork: order.sendCoin.network,
+                    recvAmount: order.recvAmount,
+                    recvCoin: order.recvCoin.symbol,
+                    recvNetwork: order.recvCoin.network,
+                    destAddress: order.destAddress
+                })
+            })
+        } catch { }
     }
 
     const orderId = `ORD-${Date.now().toString(36).toUpperCase()}`
@@ -208,13 +243,19 @@ export default function OrderPage({ order, onBack }) {
                         <div style={{
                             marginTop: 16, textAlign: 'center', padding: 20,
                             background: '#fff', borderRadius: 12,
-                            display: 'flex', alignItems: 'center', justifyContent: 'center'
+                            display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
                         }}>
                             <img
                                 src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(depositAddress)}`}
                                 alt="QR Code"
                                 style={{ width: 180, height: 180, borderRadius: 8 }}
                             />
+                            <p style={{
+                                marginTop: 10, fontSize: 13, fontWeight: 600,
+                                color: '#64748b', letterSpacing: 1, textTransform: 'uppercase'
+                            }}>
+                                ESCANEAR QR CODE
+                            </p>
                         </div>
                     </>
                 )}
@@ -256,33 +297,30 @@ export default function OrderPage({ order, onBack }) {
                 ))}
             </div>
 
-            {/* Email Notifications */}
+            {/* Confirm Transfer Button */}
             <div className="glass-card" style={{ padding: 20 }}>
-                <h4 style={{ fontSize: 14, fontWeight: 600, color: '#fff', marginBottom: 4 }}>
-                    <Mail size={16} style={{ verticalAlign: 'middle', marginRight: 8 }} />
-                    {t('order.notifications')}
-                </h4>
-                <p style={{ fontSize: 12, color: '#64748b', marginBottom: 12 }}>{t('order.email_desc')}</p>
-                {emailSent ? (
-                    <p style={{ fontSize: 13, color: '#16a34a' }}>{t('order.email_success')}</p>
-                ) : (
-                    <div style={{ display: 'flex', gap: 8 }}>
-                        <input
-                            type="email"
-                            value={email}
-                            onChange={e => setEmail(e.target.value)}
-                            placeholder={t('order.email_placeholder')}
-                            className="input-dark"
-                            style={{ flex: 1, padding: '10px 14px', fontSize: 14 }}
-                        />
-                        <button
-                            className="btn-primary"
-                            onClick={() => setEmailSent(true)}
-                            style={{ padding: '10px 20px', fontSize: 13 }}
-                        >
-                            {t('order.confirm')}
-                        </button>
+                {transferSent ? (
+                    <div style={{ textAlign: 'center' }}>
+                        <Check size={32} color="#16a34a" style={{ marginBottom: 8 }} />
+                        <p style={{ fontSize: 15, fontWeight: 600, color: '#16a34a' }}>
+                            {t('order.transfer_confirmed') || 'Transfer confirmed! We will process your order shortly.'}
+                        </p>
+                        <p style={{ fontSize: 12, color: '#64748b', marginTop: 8 }}>
+                            {t('order.transfer_confirmed_desc') || 'You will receive your coins once the transaction is verified on the blockchain.'}
+                        </p>
                     </div>
+                ) : (
+                    <button
+                        className="btn-primary"
+                        onClick={handleConfirmTransfer}
+                        style={{
+                            width: '100%', padding: '16px 0', fontSize: 15,
+                            fontWeight: 600, letterSpacing: 0.3,
+                            background: 'linear-gradient(135deg, #16a34a, #15803d)'
+                        }}
+                    >
+                        {t('order.confirm_transfer') || 'I sent the transfer'}
+                    </button>
                 )}
             </div>
         </div>
