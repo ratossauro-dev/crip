@@ -17,7 +17,7 @@ export default function Features() {
             textAlign: 'center'
         }}>
             <h2 className="features-title" style={{ fontSize: 36, fontWeight: 700, color: '#fff', marginBottom: 12 }}>
-                {t('features.title')} <span className="text-gradient">CryptoSwap</span>?
+                {t('features.title')} <span className="text-gradient">LilacSwap</span>?
             </h2>
             <p style={{ fontSize: 16, color: '#94a3b8', maxWidth: 600, margin: '0 auto 48px' }}>
                 {t('features.subtitle')}

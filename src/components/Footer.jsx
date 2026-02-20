@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from '../i18n/LanguageContext'
-import { Zap } from 'lucide-react'
+
 
 export default function Footer({ openModal, setCurrentPage }) {
     const { t } = useTranslation()
@@ -18,14 +18,15 @@ export default function Footer({ openModal, setCurrentPage }) {
                 {/* Brand */}
                 <div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
-                        <div style={{
-                            background: 'linear-gradient(135deg, #2f8af5, #7c3aed)',
-                            borderRadius: 8, width: 28, height: 28,
-                            display: 'flex', alignItems: 'center', justifyContent: 'center'
+                        <img src="/logo.png" alt="LilacSwap" style={{ width: 24, height: 24, objectFit: 'contain' }} />
+                        <span style={{
+                            fontSize: 18, fontWeight: 800, letterSpacing: '-0.5px',
+                            background: 'linear-gradient(135deg, #C38BFF, #00D1FF)',
+                            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
+                            backgroundClip: 'text'
                         }}>
-                            <Zap size={14} color="#fff" />
-                        </div>
-                        <span style={{ fontSize: 16, fontWeight: 700, color: '#fff' }}>CryptoSwap</span>
+                            LilacSwap
+                        </span>
                     </div>
                     <p className="footer-brand-text" style={{ fontSize: 13, color: '#64748b', lineHeight: 1.5, maxWidth: 250 }}>
                         {t('footer.desc')}
@@ -87,7 +88,7 @@ export default function Footer({ openModal, setCurrentPage }) {
                 borderTop: '1px solid var(--color-border)', paddingTop: 20,
                 textAlign: 'center', fontSize: 12, color: '#475569'
             }}>
-                © {new Date().getFullYear()} CryptoSwap. {t('footer.rights')}
+                © {new Date().getFullYear()} LilacSwap. {t('footer.rights')}
             </div>
         </footer>
     )

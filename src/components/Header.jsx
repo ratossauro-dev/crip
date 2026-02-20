@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useTranslation } from '../i18n/LanguageContext'
-import { Zap, Menu, X, Globe } from 'lucide-react'
+import { Menu, X, Globe } from 'lucide-react'
 
 export default function Header({ currentPage, setCurrentPage, openModal }) {
     const { t, lang, setLang } = useTranslation()
@@ -28,14 +28,15 @@ export default function Header({ currentPage, setCurrentPage, openModal }) {
                     onClick={() => setCurrentPage('home')}
                     style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer' }}
                 >
-                    <div style={{
-                        background: 'linear-gradient(135deg, #2f8af5, #7c3aed)',
-                        borderRadius: 10, width: 36, height: 36,
-                        display: 'flex', alignItems: 'center', justifyContent: 'center'
+                    <img src="/logo.png" alt="LilacSwap" style={{ width: 36, height: 36, objectFit: 'contain' }} />
+                    <span style={{
+                        fontSize: 22, fontWeight: 800, letterSpacing: '-0.5px',
+                        background: 'linear-gradient(135deg, #C38BFF, #00D1FF)',
+                        WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text'
                     }}>
-                        <Zap size={20} color="#fff" />
-                    </div>
-                    <span style={{ fontSize: 20, fontWeight: 700, color: '#fff' }}>CryptoSwap</span>
+                        LilacSwap
+                    </span>
                 </div>
 
                 {/* Desktop Nav */}

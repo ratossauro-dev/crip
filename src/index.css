@@ -5,9 +5,9 @@
   --color-card: #131524;
   --color-surface: #1a1b2e;
   --color-input: #1e2035;
-  --color-primary: #2f8af5;
-  --color-primary-dark: #1c6dd0;
-  --color-accent: #7c3aed;
+  --color-primary: #00D1FF;
+  --color-primary-dark: #00a8cc;
+  --color-accent: #C38BFF;
   --color-brand: #2f8af5;
   --color-text: #e2e8f0;
   --color-text-muted: #94a3b8;
@@ -201,7 +201,7 @@ body {
 
 /* Utility */
 .text-gradient {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  background: linear-gradient(135deg, #C38BFF, #00D1FF);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
