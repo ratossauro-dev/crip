@@ -3,6 +3,8 @@ import { useTranslation } from '../i18n/LanguageContext'
 import { Copy, AlertTriangle, Check, Clock, ArrowRight } from 'lucide-react'
 import crypto from '../services/hmac'
 
+const API = import.meta.env.VITE_API_URL || ''
+
 export default function OrderPage({ order, onBack }) {
     const { t } = useTranslation()
     const [copied, setCopied] = useState(false)
@@ -16,7 +18,7 @@ export default function OrderPage({ order, onBack }) {
     useEffect(() => {
         async function fetchAddress() {
             try {
-                const res = await fetch('/api/get-deposit-address', {
+                const res = await fetch(`${API}/api/get-deposit-address`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -46,7 +48,7 @@ export default function OrderPage({ order, onBack }) {
         fetchAddress()
 
         // Notify backend about new order (Telegram alert)
-        fetch('/api/notify-order', {
+        fetch(`${API}/api/notify-order`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -81,7 +83,7 @@ export default function OrderPage({ order, onBack }) {
     const handleConfirmTransfer = async () => {
         setTransferSent(true)
         try {
-            await fetch('/api/confirm-transfer', {
+            await fetch(`${API}/api/confirm-transfer`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
