@@ -58,6 +58,7 @@ export default function SwapWidget({ coins, onCreateOrder, openCurrencyModal }) 
             <div style={{ display: 'flex', gap: 8, marginTop: 4 }}>
                 <button
                     onClick={onClick}
+                    className="coin-selector-btn"
                     style={{
                         flex: '0 0 auto', background: 'var(--color-surface)',
                         border: '1px solid var(--color-border)', borderRadius: 12,
@@ -84,19 +85,22 @@ export default function SwapWidget({ coins, onCreateOrder, openCurrencyModal }) 
                         type="number"
                         value={sendAmount}
                         onChange={e => setSendAmount(e.target.value)}
+                        className="coin-amount-input"
                         style={{
                             flex: 1, background: 'var(--color-input)', border: '1px solid var(--color-border)',
                             borderRadius: 12, padding: '10px 14px', color: '#fff',
-                            fontFamily: 'Outfit', fontSize: 18, fontWeight: 600, outline: 'none'
+                            fontFamily: 'Outfit', fontSize: 18, fontWeight: 600, outline: 'none',
+                            minWidth: 0
                         }}
                         min="0"
                     />
                 ) : (
-                    <div style={{
+                    <div className="coin-amount-display" style={{
                         flex: 1, background: 'var(--color-input)', border: '1px solid var(--color-border)',
                         borderRadius: 12, padding: '10px 14px', color: '#7c3aed',
                         fontFamily: 'Outfit', fontSize: 18, fontWeight: 600,
-                        display: 'flex', alignItems: 'center'
+                        display: 'flex', alignItems: 'center', minWidth: 0,
+                        overflow: 'hidden', textOverflow: 'ellipsis'
                     }}>
                         {recvAmount}
                     </div>

@@ -103,7 +103,7 @@ export default function App() {
                         </div>
 
                         {/* Right: Swap Widget */}
-                        <div style={{ flex: '0 1 auto' }}>
+                        <div className="swap-widget-wrapper" style={{ flex: '0 1 auto' }}>
                             <SwapWidget
                                 coins={coins}
                                 onCreateOrder={handleCreateOrder}

@@ -225,26 +225,36 @@ input[type="number"] {
 /* Tablet & below */
 @media (max-width: 768px) {
 
+  /* Prevent horizontal scroll */
+  html,
+  body {
+    overflow-x: hidden !important;
+  }
+
   /* Hero Section */
   .hero-section {
-    padding: 80px 16px 32px !important;
+    padding: 80px 12px 24px !important;
     min-height: auto !important;
+    overflow: hidden !important;
   }
 
   .hero-content {
-    gap: 32px !important;
+    gap: 24px !important;
     flex-direction: column !important;
     align-items: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   .hero-text {
     flex: none !important;
     max-width: 100% !important;
     text-align: center !important;
+    padding: 0 8px !important;
   }
 
   .hero-title {
-    font-size: 32px !important;
+    font-size: 28px !important;
     line-height: 1.15 !important;
   }
 
@@ -252,6 +262,7 @@ input[type="number"] {
     max-width: 100% !important;
     margin-left: auto !important;
     margin-right: auto !important;
+    font-size: 14px !important;
   }
 
   .hero-stats {
@@ -263,10 +274,34 @@ input[type="number"] {
     display: none !important;
   }
 
+  /* Swap Widget Wrapper */
+  .swap-widget-wrapper {
+    width: 100% !important;
+    flex: none !important;
+  }
+
   /* Swap Widget */
   .swap-widget {
     max-width: 100% !important;
-    padding: 20px !important;
+    padding: 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Coin Button - prevent overflow */
+  .coin-selector-btn {
+    min-width: 110px !important;
+    padding: 8px 10px !important;
+    gap: 6px !important;
+  }
+
+  .coin-amount-input {
+    min-width: 0 !important;
+    font-size: 16px !important;
+  }
+
+  .coin-amount-display {
+    min-width: 0 !important;
+    font-size: 16px !important;
   }
 
   /* Features */
@@ -349,7 +384,7 @@ input[type="number"] {
 /* Small phones */
 @media (max-width: 480px) {
   .hero-title {
-    font-size: 26px !important;
+    font-size: 24px !important;
   }
 
   .hero-stats {
@@ -361,12 +396,28 @@ input[type="number"] {
   }
 
   .swap-widget {
-    padding: 16px !important;
+    padding: 12px !important;
   }
 
   .rate-toggle-btn {
-    font-size: 11px !important;
+    font-size: 10px !important;
     padding: 8px 0 !important;
+  }
+
+  .coin-selector-btn {
+    min-width: 95px !important;
+    padding: 8px 8px !important;
+    font-size: 13px !important;
+  }
+
+  .coin-amount-input {
+    font-size: 15px !important;
+    padding: 8px 10px !important;
+  }
+
+  .coin-amount-display {
+    font-size: 15px !important;
+    padding: 8px 10px !important;
   }
 
   .features-section {
